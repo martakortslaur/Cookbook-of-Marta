@@ -4,11 +4,11 @@
 
     {% endblock %}
     {% block content %}
-    {% for recepie in recepies %}
+    {% for recipe in recipies %}
     <h1>{{ recepie.name }}
     </h1>
-    <p>{{ recepie.description }}
+    <p>{{ recipe.description }}
     <br>
-    {{recepie.Ingredients}}</p>
+    {{recipe.ingredients}}</p>
     {% endfor %}
     {% endblock%}
