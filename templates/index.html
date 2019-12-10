@@ -1,0 +1,14 @@
+    {%  extends 'base.html' %}
+    {% block title %}
+    <title>Homepage</title>
+
+    {% endblock %}
+    {% block content %}
+    {% for recepie in recepies %}
+    <h1>{{ recepie.name }}
+    </h1>
+    <p>{{ recepie.description }}
+    <br>
+    {{recepie.Ingredients}}</p>
+    {% endfor %}
+    {% endblock%}
