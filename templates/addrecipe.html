@@ -1,0 +1,102 @@
+{% extends 'base.html' %} 
+
+{% block content %}
+
+<h1>Share your recipe</h1>
+<div class="row">
+	<form action="{{ url_for('insert_recipe') }}" method="POST" class="new-recipe">
+		<div class="row">
+			<div class="input-field col s6">
+				<input id="recipe_name" name="recipe_name" type="text" class="validate" required/>
+				<label for="recipe_name">Name of the recipe</label>
+			</div>
+			<div class="input-field col s6">
+				<input id="recipe_description" name="recipe_description" type="text" class="validate" required/>
+				<label for="recipe_description">Description</label>
+			</div>
+		</div>
+    <div class="form-row">
+	<div class="col s4">
+    <div class="form-group">
+			<!--dynamically populates the select menu with difficulty type-->
+			<i class="material-icons prefix">priority_high</i>
+			<label for="types">Dish type </label>
+			<select class="form-control validate" name="types" id="types" required>
+                <option disabled selected>Please choose...</option>
+                {% for type in types %}
+                    <option value="{{type.types}}">{{ type.types}}</option>
+                {% endfor %}
+                </select>		
+	</div>
+    </div>
+	<div class="col s4">
+    <div class="form-group">
+			<!--dynamically populates the select menu with difficulty type-->
+			<i class="material-icons prefix">priority_high</i>
+			<label for="difficulty">Difficulty</label>
+			<select class="form-control validate" name="difficulty" id="difficulty" required>
+                <option disabled selected>Please choose...</option>
+                {% for difficult in difficulty %}
+                    <option value="{{difficult.difficulty}}">{{ difficult.difficulty }}</option>
+                {% endfor %}
+                </select>
+	</div>
+    </div>
+    </div>
+	<div class="input-field col s4">
+		<i class="material-icons prefix">access_time</i>
+		<input name="recipe_time" id="recipe_time" type="text" class="validate" required/>
+		<label for="recipe_time">Cooks in...</label>
+	</div>
+    </div>
+    <div class="form-row" id="ingredients-row">
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		<!-- input boxes to add ingredients one-by-one-->
+        <i class="material-icons prefix">list</i>
+		<label for="recipe_ingredients">Ingredients</label>
+		<input type="text" class="form-control recipe_ingredients" name="recipe_ingredients" minlength=8 required/>
+		<input type="text" class="form-control recipe_ingredients" name="recipe_ingredients" minlength=8 required/>
+		<input type="text" class="form-control recipe_ingredients" name="recipe_ingredients" minlength=8 required/>
+		<!--buttons to add / remove input boxes-->
+		<button type="button" class="new-input-btn btn-recipe_ingredients"><i class="fa fa-plus" aria-hidden="true">Add ingredient</i>
+          </button>
+		<button type="button" class="remove-input-btn btn-recipe_ingredients"><i class="fa fa-minus" aria-hidden="true">Remove Ingredient</i>
+          </button>
+	</div>
+    </div>
+    <div class="row">
+	<!-- <form class="col s12"> -->
+		<div class="row">
+			<div class="input-field col s12">
+				<textarea id="recipe_method" name="recipe_method" class="materialize-textarea" data-length="400" required></textarea>
+				<label for="recipe_method">Method</label>
+			</div>
+		</div>
+	<!-- </form> -->
+    </div>
+    <div class="row">
+	<!-- <form class="col s12"> -->
+		<div class="row">
+			<div class="input-field col s12">
+				<i class="material-icons prefix">format_quote</i>
+				<textarea id="recipe_tips" name="recipe_tips" class="materialize-textarea" data-length="160" required></textarea>
+				<label for="recipe_tips">Tips</label>
+			</div>
+		</div>
+	<!-- </form> -->
+    </div>
+    <div class="form-row">
+	<div class="col-sm-12 col-md-6 offset-lg-2 offset-lg-2 col-lg-4">
+		<!-- submit button to add new recipe to the database -->
+		<!-- <button class="btn btn-primary btn-add" id="add-btn" type="submit" name="action">Add Recipe</button>-->
+        <input class="btn" type="submit" value="Add Recipe"> 
+	</div>
+	<div class="col-sm-12 col-md-6 col-lg-4">
+		<!-- cancel button to undo any changes and return to previous page -->
+		<a class="btn btn-primary btn-cancel" onclick="history.go(-1)">Cancel</a>
+	</div>
+    </div>
+    </form>
+    </div>
+
+{% endblock %}

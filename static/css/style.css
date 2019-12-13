@@ -1,0 +1,171 @@
+@import url('https://fonts.googleapis.com/css?family=Righteous');
+
+
+.navbar-nav .nav-item .nav-link{
+
+    color: #ffffff;
+
+    font-size: 1.5em;
+
+}
+
+.navbar-nav .nav-item .nav-link:hover{
+
+    color: #ffffff;
+
+    font-weight: 800;
+
+}
+
+
+
+.navbar-toggler-icon {
+
+    background-color: #ffffff;
+
+    color: #ffffff;
+
+    height: 2em;
+
+    width: 2em;
+
+}
+
+
+
+
+h3 {
+
+    font-size: 2em;
+
+    text-align: center;
+
+}
+
+h4{
+
+    color: #a564be;
+
+    font-size: 1.25em;
+
+    text-align: center;
+
+}
+
+
+
+h5 {
+
+    font-size: 1em;
+
+    text-align: center;
+
+}
+
+.recipe-heading{
+
+    color: #42cef8;
+
+    font-weight: 800;
+
+    font-variant: small-caps;
+
+}
+
+
+
+.modal-header h4{
+
+    color: #ffffff;
+
+    font-variant: small-caps;
+
+    font-weight: 800;
+
+    
+
+}
+
+
+
+.modal-header{
+
+    background-color: #003f5c;
+
+}
+
+
+
+
+#recipe_method{
+
+    border-color: #003f5c;
+
+    color: #2f4b7c;
+
+    margin: 0 auto;
+
+    width: 100%;
+
+}
+
+footer {
+
+    height: 150px;
+
+    max-width: 150vw;
+
+    padding: 2em 1em;
+
+}
+
+
+
+footer a,
+
+footer a:hover,
+
+footer a:focus,
+
+footer a:active,
+
+footer a:visited {
+
+    color: #2adad1;
+
+}
+
+
+
+.icon{
+
+    font-size: 2em;
+
+    margin: 0.1em;
+
+    text-align: center;
+}
+
+
+.details-col{
+
+    padding: 2em 1em;
+
+}
+/********************************Form styles*/
+
+
+
+label {
+
+    font-size: 1em;
+
+}
+
+
+
+.form-check-input{
+
+    position: relative;
+
+    font-size: 1.25em;

@@ -1,70 +1,82 @@
 import os
-from flask import Flask, request, render_template
+from flask import Flask, request, render_template, redirect, url_for
 from flask_pymongo import PyMongo
+from bson.objectid import ObjectId  
+
+
+from os import path
+if path.exists('env.py'):
+    import env 
 
 app = Flask(__name__)
 
 
-app.config['MONGO_DBNAME'] = 'cookbook_database'    # name of your database
-app.config['MONGO_URI'] = os.getenv('MONGO_URI', 'mongodb+srv://marta_korts_laur:AstelV88l@cluster0-utrzr.mongodb.net/test?retryWrites=true&w=majority')   # URI (see above)
+app.config['MONGO_DBNAME'] = 'cookbook_database'
+app.config['MONGO_URI'] = os.environ.get('MONGO_URI')
+
 mongo = PyMongo(app)
 
 
+@app.route('/')
+@app.route('/get_recipes')
+def get_recipes():
+    recipes = mongo.db.recipes.find()
+    return render_template('recipes.html', recipes=recipes)
 
-@app.route("/")
-def home():
-    city_01 = {
-        "name" : "Tallinn",
-        "descr" : "Capital",
-        "bio" : "Tallinn is a great city!"
-    }
-    city_02 = {
-        "name" : "Tartu",
-        "descr" : "University city",
-        "bio" : "Tartu is a small city."
-    }
-    cities = [city_01, city_02]
-    return render_template('index.html', cities=cities)
 
-# @app.route('/playing_around_with_databases')
-# def playing_around_with_databases():
-#     movies = mongo.db.movies.find()
-#     return "This is where we will be playing around with databases"
+@app.route('/add_recipe')
+def add_recipe():
+    types = mongo.db.types.find()
+    difficulty = mongo.db.difficulty.find()
 
-# retrieves full recipe from database when a user clicks on'View Recipe' button
+    return render_template('addrecipe.html', types=types, difficulty=difficulty)
 
-@app.route('/show_recipe/<recipe_id>')
 
-def show_recipe(recipe_id):
 
-    recipe_count =mongo.db.recipes.count()
+@app.route('/insert_recipe', methods=['GET', 'POST'])
+def insert_recipe():
+  
+    recipes = mongo.db.recipes
+    recipes.insert_one({
+            'name' : request.form.get('recipe_name'),
+            'description' : request.form.get('recipe_description'),
+            'type' : request.form.get('recipe_type'),
+            'difficulty' : request.form.get('recipe_difficulty'),
+            'time' : request.form.get('recipe_time'),
+            'ingredients' : request.form.getlist('recipe_ingredients'),
+            'method' : request.form.get('recipe_method'),
+            'tips' : request.form.get('recipe_tips'),
+        })
 
-    return render_template('showrecipe.html', recipe_count=recipe_count, recipe=mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)}))
+    return redirect(url_for('get_recipes'))
 
-# @app.route("/europe")
-# def europe():
-#     return render_template("index.html")
 
-# @app.route("/estonia")
-# def estonia():
-#     city_01 = {
-#         "name" : "Tallinn",
-#         "descr" : "Capital"
-#     }
-#     city_02 = {
-#         "name" : "Tartu",
-#         "descr" : "University city"
-#     }
-#     cities = [city_01, city_02]
-#     return render_template("country.html", cities=cities)
+@app.route('/edit_recipe/<recipe_id>')
+def edit_recipe(recipe_id):
+    types = mongo.db.types.find()
+    difficulty = mongo.db.difficulty.find()
+    dishes = mongo.db.recipes.find()
+    recipe_count = mongo.db.recipes.count()
+    recipe = mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)})
+    return render_template("editrecipe.html", recipe=recipe, dishes=dishes, types=types, difficulty=difficulty)
+   
 
-# @app.route("/north-america")
-# def america():
-#     return "This is the north american home page"
+@app.route('/update_recipe/<recipe_id>', methods=["GET", "POST"])
+def update_recipe(recipe_id):
+    recipes = mongo.db.recipes
+    recipes.update({'_id': ObjectId(recipe_id)},
+    {
+            'name' : request.form.get('recipe_name'),
+            'description' : request.form.get('recipe_description'),
+            'type' : request.form.get('recipe_type'),
+            'difficulty' : request.form.get('recipe_difficulty'),
+            'time' : request.form.get('recipe_time'),
+            'ingredients' : request.form.getlist('recipe_ingredients'),
+            'method' : request.form.get('recipe_method'),
+            'tips' : request.form.get('recipe_tips'),
+    })
 
-# @app.route("/asia")
-# def asia():
-#     return "This is the asian home page"
+    return redirect(url_for('get_recipes'))
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP', '0.0.0.0'),
