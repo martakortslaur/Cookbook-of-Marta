@@ -8,8 +8,27 @@
 
 <!-- for loop to loop through recipes starts here -->
 {% for recipe in recipes %}
+    <div class="parallax-container">
+      <div class="parallax"><img src="static/images/parallax1.jpg"></div>
+    </div>
+    <div class="section white">
+      <div class="row container">
+        <h2 class="header">{{recipe.name}}</h2>
+        <p class="grey-text text-darken-3 lighten-3"> <p>{{recipe.description}}
+    </p><br>
+    <p>{{recipe.type}}</p><br>
+    <p>{{recipe.difficulty}}</p><br>
+    <p>{{recipe.time}}</p><br>
+    <p>{{recipe.ingredients}}</p><br>
+    <p>{{recipe.method}}</p><br>
+    <p>{{recipe.tips}}</p><br>
+      </div>
+    </div>
+    <div class="parallax-container">
+      <div class="parallax"><img src="static/images/parallax2.jpg"></div>
+    
 
-    <h1>{{recipe.name}}
+    <!-- <h1>
     </h1>
     <p>{{recipe.description}}
     </p><br>
@@ -18,10 +37,12 @@
     <p>{{recipe.time}}</p><br>
     <p>{{recipe.ingredients}}</p><br>
     <p>{{recipe.method}}</p><br>
-    <p>{{recipe.tips}}</p><br>
+    <p>{{recipe.tips}}</p><br> -->
     
-    <a class="waves-effect waves-light btn" href="{{url_for('edit_recipe', recipe_id=recipe._id)}}"><i class="material-icons left">cloud</i>Edit recipe</a>
+    <a class="waves-effect waves-light btn" href="{{url_for('edit_recipe', recipe_id=recipe._id)}}"><i class="material-icons left">add</i>Edit recipe</a>
+    </div>
     
+        
 {% endfor %}
 <!-- for loop to loop through recipes ends here -->
 

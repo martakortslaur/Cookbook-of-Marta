@@ -1,5 +1,20 @@
-@import url('https://fonts.googleapis.com/css?family=Righteous');
+/* @import url('https://fonts.googleapis.com/css?family=Rancho&effect=shadow-multiple'); */
 
+header{
+
+    /* background-image:url(../images/; */
+
+    background-attachment: fixed;
+
+    background-position: center;
+
+    background-repeat: no-repeat;
+
+    background-size: cover;
+
+    height: 60vh;
+
+}
 
 .navbar-nav .nav-item .nav-link{
 
@@ -32,8 +47,6 @@
 }
 
 
-
-
 h3 {
 
     font-size: 2em;
@@ -41,17 +54,6 @@ h3 {
     text-align: center;
 
 }
-
-h4{
-
-    color: #a564be;
-
-    font-size: 1.25em;
-
-    text-align: center;
-
-}
-
 
 
 h5 {
@@ -66,9 +68,8 @@ h5 {
 
     color: #42cef8;
 
-    font-weight: 800;
+    font-weight: 600;
 
-    font-variant: small-caps;
 
 }
 
@@ -78,9 +79,7 @@ h5 {
 
     color: #ffffff;
 
-    font-variant: small-caps;
-
-    font-weight: 800;
+    font-weight: 600;
 
     
 
@@ -94,6 +93,34 @@ h5 {
 
 }
 
+
+/* style for select elements */
+
+
+
+.form-inline .row {
+
+    margin: 0;
+
+    margin-bottom: 3em;
+
+    width: 100%;
+
+}
+
+
+
+.form-control{
+
+    border-color: #003f5c;
+
+    color: #2f4b7c;
+
+    margin: 0 auto;
+
+    width: 100%;
+
+}
 
 
 
@@ -123,13 +150,7 @@ footer {
 
 footer a,
 
-footer a:hover,
-
-footer a:focus,
-
-footer a:active,
-
-footer a:visited {
+footer a:hover {
 
     color: #2adad1;
 
@@ -152,7 +173,7 @@ footer a:visited {
     padding: 2em 1em;
 
 }
-/********************************Form styles*/
+/* Form Styles */
 
 
 
@@ -162,10 +183,61 @@ label {
 
 }
 
+.collapse{
+
+    width: 90%;
+
+    margin: 0 5%;
+
+}
 
 
-.form-check-input{
+/*****************************Media queries*/
 
-    position: relative;
 
-    font-size: 1.25em;
+
+@media screen and (min-width: 768px) {
+
+    header{
+
+        height: 10h;
+
+    }
+    
+    .collapse{
+
+        width: 90%;
+
+        margin: 0 5%;
+
+    }
+
+
+}
+
+
+@media screen and (min-width: 992px) {
+
+    header{
+
+        height: 10vh;
+
+    }
+
+    
+    h1{
+
+        font-size: 2em;
+
+    }
+
+
+    
+    label {
+
+        font-size: 1.5em;
+
+    }
+
+
+}

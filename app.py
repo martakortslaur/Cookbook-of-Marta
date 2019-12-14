@@ -21,6 +21,7 @@ mongo = PyMongo(app)
 @app.route('/get_recipes')
 def get_recipes():
     recipes = mongo.db.recipes.find()
+    # recipe_count = mongo.db.recipes.count()
     return render_template('recipes.html', recipes=recipes)
 
 
@@ -58,7 +59,7 @@ def edit_recipe(recipe_id):
     dishes = mongo.db.recipes.find()
     recipe_count = mongo.db.recipes.count()
     recipe = mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)})
-    return render_template("editrecipe.html", recipe=recipe, dishes=dishes, types=types, difficulty=difficulty)
+    return render_template("editrecipe.html", recipe=recipe, dishes=dishes, types=types, difficulty=difficulty,  recipe_count=recipe_count)
    
 
 @app.route('/update_recipe/<recipe_id>', methods=["GET", "POST"])
@@ -77,6 +78,15 @@ def update_recipe(recipe_id):
     })
 
     return redirect(url_for('get_recipes'))
+
+
+@app.route('/delete_recipe/<recipe_id>')
+def delete_recipe(recipe_id):
+    recipe_count =mongo.db.recipes.count()
+    mongo.db.recipes.remove({'_id':ObjectId(recipe_id)})
+    return redirect(url_for('get_recipes'))
+    return render_template('editrecipe.html', recipe_count=recipe_count, recipe=mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)}))
+
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP', '0.0.0.0'),
