@@ -1,4 +1,5 @@
-{% extends 'base.html'%} {% block content %}
+{% extends 'base.html' %}
+{% block content %}
 
 <h3>Edit Recipe</h3>
 
@@ -12,7 +13,7 @@
 				<label for="recipe_description">Description </label>
 				<input type="text" class="form-control" name="recipe_description" id="recipe_description" value="{{recipe.description}}" required/>
             </div>
-			</div>
+            </div>
 			<div class="form-row">
 				<div class="col s4">
 					<div class="form-group">
@@ -20,11 +21,11 @@
 						<i class="material-icons prefix">priority_high</i>
 						<label for="types">Dish type </label>
 						<select class="form-control validate" name="types" id="types" required>
-                <option disabled selected>Please choose...</option>
-                {% for type in types %}
-                    <option value="{{type.types}}">{{ type.types}}</option>
-                {% endfor %}
-                </select>
+                                <option disabled selected>Please choose...</option>
+                                            {% for type in types %}
+                                                <option value="{{type.types}}">{{ type.types }}</option>
+                                            {% endfor %}
+                            </select>
 					</div>
 				</div>
 				<div class="col s4">
@@ -32,12 +33,12 @@
 						<!--dynamically populates the select menu with difficulty type-->
 						<i class="material-icons prefix">priority_high</i>
 						<label for="difficulty">Difficulty</label>
-						<select class="form-control validate" name="difficulty" id="difficulty" required>
-                <option disabled selected>Please choose...</option>
-                {% for difficult in difficulty %}
-                    <option value="{{difficult.difficulty}}">{{ difficult.difficulty }}</option>
-                {% endfor %}
-                </select>
+				        <select class="form-control validate" name="difficulty" id="difficulty" required>
+                            <option disabled selected>Please choose...</option>
+                            {% for difficult in difficulty %}
+                                <option value="{{difficult.difficulty}}">{{ difficult.difficulty }}</option>
+                            {% endfor %}
+                        </select>
 					</div>
 				</div>
 			</div>
@@ -46,92 +47,99 @@
 				<input name="recipe_time" id="recipe_time" type="text" class="validate" value="{{recipe.time}}" required/>
 				<label for="recipe_time">Cooks in...</label>
 			</div>
-		
-		<div class="row" id="ingredients-row">
-			<div class="col-sm-12 col-md-12 col-lg-12">
-				<!-- input boxes to add ingredients one-by-one-->
-				<i class="material-icons prefix">list</i>
-				<label for="recipe_ingredients" value="{{recipe.ingredients}}">Ingredients</label>
-				<input type="text" class="form-control recipe_ingredients" name="recipe_ingredients" minlength=8 required/>
-				<input type="text" class="form-control recipe_ingredients" name="recipe_ingredients" minlength=8 required/>
-				<input type="text" class="form-control recipe_ingredients" name="recipe_ingredients" minlength=8 required/>
-				<!--buttons to add / remove input boxes-->
-				<button type="button" class="new-input-btn btn-recipe_ingredients"><i class="fa fa-plus" aria-hidden="true">Add ingredient</i>
-          </button>
-				<button type="button" class="remove-input-btn btn-recipe_ingredients"><i class="fa fa-minus" aria-hidden="true">Remove Ingredient</i>
-          </button>
-			</div>
-		</div>
-		<div class="form-row">
-			<!-- <form class="col-sm-12 col-md-12 col-lg-12"> -->
-			<div class="row details-col">
-				<div class="input-field">
-					<textarea id="recipe_method" name="recipe_method"  data-length="2000">{{recipe.method}}</textarea>
-					<label for="recipe_method">Method</label>
+
+			<div class="row" id="ingredients-row">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<!-- input boxes to add ingredients one-by-one-->
+					<i class="material-icons prefix">list</i>
+					<label for="ingredients" value="{{recipe.ingredients}}">Ingredients</label>
+					<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
+					<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
+					<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
+					<!--buttons to add / remove input boxes-->
+					<button type="button" class="new-input-btn btn-ingredients">Add ingredient</button>
+					<button type="button" class="remove-input-btn btn-ingredients">Remove ingredient</button>
 				</div>
 			</div>
-			<!-- </form> -->
+			<div class="form-row">
+				<!-- <form class="col-sm-12 col-md-12 col-lg-12"> -->
+				<div class="row details-col">
+					<div class="input-field">
+						<textarea id="recipe_method" name="recipe_method"  data-length="2000">{{recipe.method}}</textarea>
+						<label for="recipe_method">Method</label>
+					</div>
+				</div>
+				<!-- </form> -->
+			</div>
+			<div class="form-row">
+				<!-- <form class="col-sm-12 col-md-12 col-lg-12"> -->
+				<div class="row details-col">
+					<div class="input-field">
+						<i class="material-icons prefix">format_quote</i>
+						<textarea id="recipe_tips" name="recipe_tips" data-length="1000" >{{recipe.tips}}</textarea>
+						<label for="recipe_tips">Tips</label>
+					</div>
+				</div>
+				<!-- </form> -->
+			</div>
+			<div class="form-row">
+				<!-- button to submit updated recipe to database -->
+				<div class="col-sm-12 col-md-6 offset-lg-3 col-lg-3">
+					<button class="btn btn-primary btn-add" type="submit" name="action">Save Changes</button>
+				</div>
+				<!-- cancel button -->
+				<div class="col-sm-12 col-md-6 col-lg-3">
+					<a class="btn btn-primary btn-cancel" onclick="history.go(-1)">Cancel</a>
+				</div>
+				<div class="col-sm-12 col-md-6 col-lg-3">
+					{% if recipe_count > 4 %}
+					<a class="btn btn-primary btn-delete" role="button" data-toggle="modal"
+						data-target="#deleteRecipe">Delete Recipe </a>
+					{% else %}
+					<a class="btn btn-primary btn-delete" role="button" data-toggle="modal"
+						data-target="#notEnoughRecipe">Delete Recipe </a>
+					{% endif %}
+				</div>
+
+			</div>
 		</div>
-		<div class="form-row">
-			<!-- <form class="col-sm-12 col-md-12 col-lg-12"> -->
-			<div class="row details-col">
-				<div class="input-field">
-					<i class="material-icons prefix">format_quote</i>
-					<textarea id="recipe_tips" name="recipe_tips" data-length="1000" >{{recipe.tips}}</textarea>
-					<label for="recipe_tips">Tips</label>
+
+
+		<div class="modal fade" id="deleteRecipe" tabindex="-1" role="dialog" aria-labelledby="deleteRecipeLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<h4>Are you sure you want to delete this recipe? </h4>
+						<button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span></button>
+					</div>
+					<div class="modal-body">
+						<h4 class="modal-title" id="deleteRecipeLabel">{{recipe.name}}</h4>
+
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary btn-cancel" data-dismiss="modal">Cancel </button>
+						<a role="button" href="{{url_for('delete_recipe', recipe_id=recipe._id)}}"
+							class="btn btn-primary btn-delete">Yes, delete this recipe</a>
+					</div>
 				</div>
 			</div>
-			<!-- </form> -->
 		</div>
-		<div class="form-row">
-			<!-- button to submit updated recipe to database -->
-			<div class="col-sm-12 col-md-6 offset-lg-3 col-lg-3">
-				<button class="btn btn-primary btn-add" type="submit" name="action">Save Changes</button>
+		<div class="modal fade" id="notEnoughRecipe" tabindex="-1" role="dialog" aria-labelledby="notEnoughRecipeLabel"
+			aria-hidden="true">
+			<div class="modal-dialog" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<p class="modal-paragraph">There needs to be at least 4 recipes at all time<br>
+                    Please add a recipe before deleting one.</p>
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-secondary btn-okay" data-dismiss="modal">Okay </button>
+					</div>
+				</div>
 			</div>
-			<!-- cancel button -->
-			<div class="col-sm-12 col-md-6 col-lg-3">
-				<a class="btn btn-primary btn-cancel" onclick="history.go(-1)">Cancel</a>
-			</div>
-		</div>
         </div>
 </form>
-<div class="col-sm-12 col-md-6 col-lg-3">
-        {% if recipe_count > 4 %}
-            <a class="btn btn-primary btn-delete" role="button" data-toggle="modal" data-target="#deleteRecipe">Delete Recipe </a>
-        {% else %}
-            <a class="btn btn-primary btn-delete" role="button" data-toggle="modal" data-target="#notEnoughRecipe">Delete Recipe </a>
-        {% endif %}
-    </div>
-    <div class="modal fade" id="deleteRecipe" tabindex="-1" role="dialog" aria-labelledby="deleteRecipeLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4>Are you sure you want to delete this recipe? </h4>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                      <span aria-hidden="true">&times;</span></button>
-                </div>
-                <div class="modal-body">
-                    <h4 class="modal-title" id="deleteRecipeLabel">{{recipe.name}}</h4>
-                    
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-cancel" data-dismiss="modal">Cancel </button>
-                    <a role="button" href="{{url_for('delete_recipe', recipe_id=recipe._id)}}" class="btn btn-primary btn-delete">Yes, delete this recipe</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="modal fade" id="notEnoughRecipe" tabindex="-1" role="dialog" aria-labelledby="notEnoughRecipeLabel" aria-hidden="true">
-        <div class="modal-dialog" role="document">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <p class="modal-paragraph">There are not enough recipes in the database. There needs to be at least six recipes at all time <br>
-                    Please add a recipe before deleting one.</p>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary btn-okay" data-dismiss="modal">Okay </button>
-                </div>
-            </div>
-        </div>
 
 {% endblock %}

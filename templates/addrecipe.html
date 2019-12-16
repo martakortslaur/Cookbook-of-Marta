@@ -21,7 +21,7 @@
 			<!--dynamically populates the select menu with difficulty type-->
 			<i class="material-icons prefix">priority_high</i>
 			<label for="types">Dish type </label>
-			<select class="form-control validate" name="types" id="types" required>
+			<select class="form-control validate" name="recipe_type" id="recipe_type" required>
                 <option disabled selected>Please choose...</option>
                 {% for type in types %}
                     <option value="{{type.types}}">{{ type.types}}</option>
@@ -34,7 +34,7 @@
 			<!--dynamically populates the select menu with difficulty type-->
 			<i class="material-icons prefix">priority_high</i>
 			<label for="difficulty">Difficulty</label>
-			<select class="form-control validate" name="difficulty" id="difficulty" required>
+			<select class="form-control validate" name="THISCANBECALLEDANYTHINGASLONGASITMATCHES" id="THISCANBECALLEDANYTHINGASLONGASITMATCHES" required>
                 <option disabled selected>Please choose...</option>
                 {% for difficult in difficulty %}
                     <option value="{{difficult.difficulty}}">{{ difficult.difficulty }}</option>
@@ -53,15 +53,19 @@
 	<div class="col-sm-12 col-md-12 col-lg-12">
 		<!-- input boxes to add ingredients one-by-one-->
         <i class="material-icons prefix">list</i>
-		<label for="recipe_ingredients">Ingredients</label>
-		<input type="text" class="form-control recipe_ingredients" name="recipe_ingredients" minlength=8 required/>
-		<input type="text" class="form-control recipe_ingredients" name="recipe_ingredients" minlength=8 required/>
-		<input type="text" class="form-control recipe_ingredients" name="recipe_ingredients" minlength=8 required/>
+		<label for="ingredients">Ingredients</label>
+
+    <!-- {% for ingredient in recipe.ingredients %}
+        <input type="text" class="form-control ingredient" name="ingredients" id="ingredients" placeholder="3 eggs" value="{{ingredient}}" minlength=8> 
+      {% endfor %} -->
+
+        <input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
+		<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
+		<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
+
 		<!--buttons to add / remove input boxes-->
-		<button type="button" class="new-input-btn btn-recipe_ingredients">Add ingredient
-          </button>
-		<button type="button" class="remove-input-btn btn-recipe_ingredients">Remove ingredient
-          </button>
+		<button type="button" class="new-input-btn btn-ingredients">Add ingredient</button>
+		<button type="button" class="remove-input-btn btn-ingredients">Remove ingredient</button>
 	</div>
     </div>
     <div class="row">

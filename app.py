@@ -21,36 +21,34 @@ mongo = PyMongo(app)
 @app.route('/get_recipes')
 def get_recipes():
     recipes = mongo.db.recipes.find()
-    # recipe_count = mongo.db.recipes.count()
-    return render_template('recipes.html', recipes=recipes)
+    recipe_count = mongo.db.recipes.count()
+    return render_template('recipes.html', recipes=recipes, recipe_count=recipes)
 
 
 @app.route('/add_recipe')
 def add_recipe():
     types = mongo.db.types.find()
     difficulty = mongo.db.difficulty.find()
-
     return render_template('addrecipe.html', types=types, difficulty=difficulty)
-
 
 
 @app.route('/insert_recipe', methods=['GET', 'POST'])
 def insert_recipe():
-  
+
     recipes = mongo.db.recipes
     recipes.insert_one({
             'name' : request.form.get('recipe_name'),
             'description' : request.form.get('recipe_description'),
             'type' : request.form.get('recipe_type'),
-            'difficulty' : request.form.get('recipe_difficulty'),
+            'difficulty' : request.form.get('THISCANBECALLEDANYTHINGASLONGASITMATCHES'),
             'time' : request.form.get('recipe_time'),
-            'ingredients' : request.form.getlist('recipe_ingredients'),
+            'ingredients' : request.form.getlist('ingredients'),
             'method' : request.form.get('recipe_method'),
             'tips' : request.form.get('recipe_tips'),
         })
-
+ 
     return redirect(url_for('get_recipes'))
-
+    
 
 @app.route('/edit_recipe/<recipe_id>')
 def edit_recipe(recipe_id):
@@ -70,9 +68,9 @@ def update_recipe(recipe_id):
             'name' : request.form.get('recipe_name'),
             'description' : request.form.get('recipe_description'),
             'type' : request.form.get('recipe_type'),
-            'difficulty' : request.form.get('recipe_difficulty'),
+            'difficulty' : request.form.get('THISCANBECALLEDANYTHINGASLONGASITMATCHES'),
             'time' : request.form.get('recipe_time'),
-            'ingredients' : request.form.getlist('recipe_ingredients'),
+            'ingredients' : request.form.getlist('ingredient'),
             'method' : request.form.get('recipe_method'),
             'tips' : request.form.get('recipe_tips'),
     })
@@ -84,9 +82,8 @@ def update_recipe(recipe_id):
 def delete_recipe(recipe_id):
     recipe_count =mongo.db.recipes.count()
     mongo.db.recipes.remove({'_id':ObjectId(recipe_id)})
+    return render_template('recipes.html', recipe_count=recipe_count, recipe=mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)}))
     return redirect(url_for('get_recipes'))
-    return render_template('editrecipe.html', recipe_count=recipe_count, recipe=mongo.db.recipes.find_one({'_id':ObjectId(recipe_id)}))
-
 
 if __name__ == '__main__':
     app.run(host=os.environ.get('IP', '0.0.0.0'),
