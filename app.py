@@ -18,12 +18,26 @@ mongo = PyMongo(app)
 
 
 @app.route('/')
+
 @app.route('/get_recipes')
 def get_recipes():
     recipes = mongo.db.recipes.find()
     recipe_count = mongo.db.recipes.count()
     return render_template('recipes.html', recipes=recipes, recipe_count=recipes)
 
+
+# @app.route("my_route_url")
+# def my_route_function():
+#     recipe = mongo.db.recipes.find("name": "bread")
+   
+#     if request.method == "POST":
+#         # code to send your form to the database here
+#         return redirect(url_for('get_recipes', recipe=recipe)
+
+#     return render_template('recipes.html', recipe=recipe)
+
+
+# displays a form that allows the user to add a recipe to the database
 
 @app.route('/add_recipe')
 def add_recipe():
@@ -34,8 +48,9 @@ def add_recipe():
 
 @app.route('/insert_recipe', methods=['GET', 'POST'])
 def insert_recipe():
-
+ #get recipe collection
     recipes = mongo.db.recipes
+     #then do a recipe insert and convert form to a dictionary, so can be understood by Mongodb
     recipes.insert_one({
             'name' : request.form.get('recipe_name'),
             'description' : request.form.get('recipe_description'),
@@ -63,14 +78,16 @@ def edit_recipe(recipe_id):
 @app.route('/update_recipe/<recipe_id>', methods=["GET", "POST"])
 def update_recipe(recipe_id):
     recipes = mongo.db.recipes
+     #access recipes collection and call the update function
     recipes.update({'_id': ObjectId(recipe_id)},
+        #match form fields to keys in the recipes collection
     {
             'name' : request.form.get('recipe_name'),
             'description' : request.form.get('recipe_description'),
             'type' : request.form.get('recipe_type'),
             'difficulty' : request.form.get('THISCANBECALLEDANYTHINGASLONGASITMATCHES'),
             'time' : request.form.get('recipe_time'),
-            'ingredients' : request.form.getlist('ingredient'),
+            'ingredients' : request.form.getlist('ingredients'),
             'method' : request.form.get('recipe_method'),
             'tips' : request.form.get('recipe_tips'),
     })

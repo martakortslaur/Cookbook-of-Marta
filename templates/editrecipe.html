@@ -47,32 +47,26 @@
 				<input name="recipe_time" id="recipe_time" type="text" class="validate" value="{{recipe.time}}" required/>
 				<label for="recipe_time">Cooks in...</label>
 			</div>
-
 			<div class="row" id="ingredients-row">
 				<div class="col-sm-12 col-md-12 col-lg-12">
-					<!-- input boxes to add ingredients one-by-one-->
 					<i class="material-icons prefix">list</i>
-					<label for="ingredients" value="{{recipe.ingredients}}">Ingredients</label>
+					<label for="ingredients" value="{{ingredient}}">Ingredients</label>
 					<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
 					<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
 					<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
-					<!--buttons to add / remove input boxes-->
 					<button type="button" class="new-input-btn btn-ingredients">Add ingredient</button>
 					<button type="button" class="remove-input-btn btn-ingredients">Remove ingredient</button>
 				</div>
 			</div>
 			<div class="form-row">
-				<!-- <form class="col-sm-12 col-md-12 col-lg-12"> -->
 				<div class="row details-col">
 					<div class="input-field">
 						<textarea id="recipe_method" name="recipe_method"  data-length="2000">{{recipe.method}}</textarea>
 						<label for="recipe_method">Method</label>
 					</div>
 				</div>
-				<!-- </form> -->
 			</div>
 			<div class="form-row">
-				<!-- <form class="col-sm-12 col-md-12 col-lg-12"> -->
 				<div class="row details-col">
 					<div class="input-field">
 						<i class="material-icons prefix">format_quote</i>
@@ -80,7 +74,6 @@
 						<label for="recipe_tips">Tips</label>
 					</div>
 				</div>
-				<!-- </form> -->
 			</div>
 			<div class="form-row">
 				<!-- button to submit updated recipe to database -->

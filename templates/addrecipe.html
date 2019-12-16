@@ -54,32 +54,59 @@
 		<!-- input boxes to add ingredients one-by-one-->
         <i class="material-icons prefix">list</i>
 		<label for="ingredients">Ingredients</label>
+		<input type="text" class="form-control ingredients" name="ingredients" minlength=8 required/>
+		<input type="text" class="form-control ingredients" name="ingredients" minlength=8 required/>
+		<input type="text" class="form-control ingredients" name="ingredients" minlength=8 required/>
+		<!--buttons to add / remove input boxes-->
+		<button type="button" class="new-input-btn btn-recipe_ingredients"><i class="fa fa-plus" aria-hidden="true">Add ingredient</i>
+          </button>
+		<button type="button" class="remove-input-btn btn-recipe_ingredients"><i class="fa fa-minus" aria-hidden="true">Remove Ingredient</i>
+          </button>
+	</div>
+    </div>
+
+			<!-- <div class="row" id="ingredients-row">
+				<div class="col-sm-12 col-md-12 col-lg-12">
+					<i class="material-icons prefix">list</i>
+					<label for="ingredients" value="{{ingredient}}">Ingredients</label>
+					<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
+					<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
+					<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
+					<button type="button" class="new-input-btn btn-ingredients">Add ingredient</button>
+					<button type="button" class="remove-input-btn btn-ingredients">Remove ingredient</button>
+				</div>
+			 -->
+
+    <!-- <div class="form-row" id="ingredients-row">
+	<div class="col-sm-12 col-md-12 col-lg-12">
+		
+        <i class="material-icons prefix">list</i>
+		<label for="ingredients">Ingredients</label> -->
 
     <!-- {% for ingredient in recipe.ingredients %}
         <input type="text" class="form-control ingredient" name="ingredients" id="ingredients" placeholder="3 eggs" value="{{ingredient}}" minlength=8> 
       {% endfor %} -->
 
-        <input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
+        <!-- <input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
 		<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
 		<input type="text" class="form-control ingredients" name="ingredients" placeholder="3 eggs" minlength=6 required/>
 
-		<!--buttons to add / remove input boxes-->
 		<button type="button" class="new-input-btn btn-ingredients">Add ingredient</button>
 		<button type="button" class="remove-input-btn btn-ingredients">Remove ingredient</button>
 	</div>
-    </div>
-    <div class="row">
-	<!-- <form class="col s12"> -->
+    </div> -->
+   
+	
 		<div class="row">
 			<div class="input-field col s12">
 				<textarea id="recipe_method" name="recipe_method" class="materialize-textarea" data-length="400" required></textarea>
 				<label for="recipe_method">Method</label>
 			</div>
 		</div>
-	<!-- </form> -->
-    </div>
+
+    
     <div class="row">
-	<!-- <form class="col s12"> -->
+	
 		<div class="row">
 			<div class="input-field col s12">
 				<i class="material-icons prefix">format_quote</i>
@@ -87,7 +114,7 @@
 				<label for="recipe_tips">Tips</label>
 			</div>
 		</div>
-	<!-- </form> -->
+
     </div>
     <div class="form-row">
 	<div class="col-sm-12 col-md-6 offset-lg-2 offset-lg-2 col-lg-4">
